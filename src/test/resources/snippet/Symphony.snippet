@@ -1,0 +1,52 @@
+@Given "^I login to Portfolio Page$"
+    Given I login into mobile/web channel as RM with valid "1234567" and "123"
+    Then I should see the client listing page is getting displayed
+    When I select the client "Transactor Name" in client listing page
+    Then I should be landed into "Portfolio analysis" page
+
+@Given "^I login with (.*) to (.*) IDEAS FOR YOU page from position \"([0-9]+)\" of the global search result$" (rm_id, mandate_name, position)
+    Given I login into mobile/web channel as RM with bank id ${rm_id}
+    When I global search for ${mandate_name}
+    And I take a screenshot
+    And I click on ${mandate_name} in position on row "${position}" from global search results
+    Then I should be landed into "Portfolio analysis" page
+    When I click on the "Ideas for you" tab
+    When I click understood in Disclaimer popup
+    Then I should be landed into "Ideas for you" page
+    
+    
+ @Given "^Customer (.*) created a case in the customer portal$" (Company)
+ 	Given customer is on the customer portal
+ 	And I take a screenshot
+ 	When customer ${Company} logged in to the portal successfully 
+ 	And I take a screenshot
+ 	And  customer fill the below details for the case
+ 	    Then Customer ID should be populated from the customer portal
+    And Customer Type should be populated from the CIM
+    And I take a screenshot
+    And Customer should enters the contact details
+ 	  And Account Information retrieved from Customer Information Management, BRM
+ 	  And I take a screenshot
+ 	  Then Case creation time should read only
+    #Case Received Time
+    And Case Received Time should be same as Case creation Time
+    And I take a screenshot
+    #Case Status
+    And Case status should be as one of the OPEN,ON HOLD,RESOLVED, CLOSED from drop down by default
+    And I take a screenshot
+    #Customized Attributes
+    Then case should be created successfully
+    And I take a screenshot
+ 	
+ 	
+ 	Given I am on the customer portal
+    And I take a screenshot
+    Then I should be able to see the "Register now" link
+    When I select the Register now option
+    Then I should see the Registartion form with the all required fields
+     And I take a screenshot
+    When I filled the all required details for the company "<Company>"
+    And I take a screenshot
+    And I should submit the company registartion form
+    Then I should see the message as "Form submitted succeesfully"
+    And I take a screenshot
